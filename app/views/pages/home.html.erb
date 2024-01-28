@@ -1,0 +1,18 @@
+<h1>Assist Tool for IRONSCALES</h1>
+<p>This is a companion app for the IRONSCALES dashboard</p>
+
+<%= render 'reported_incidents/import_form' %>
+
+<% @reported_incidents.each do |incident| %>
+  <div>
+    <div>Incident-ID: <%= incident.incident_id %></div>
+    <div>Sender:<%= incident.sender %></div>
+    <div>Subject:<%= incident.subject %></div>
+    <div>Reported By:<%= incident.reported_by %></div>
+    <div>Resolution:<%= incident.resolution %></div>
+    <div>Themis Confidence:<%= incident.themis_confidence %><span>%</span></div>
+    <div>Resolved By:<%= incident.resolved_by %></div>
+    <div>Report Date and Time: <%= incident.reported %> </div>
+  </div>
+  <br />
+<% end %>

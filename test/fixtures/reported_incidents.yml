@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reported: 2024-01-28 04:45:52
+  sender: MyString
+  subject: MyString
+  reported_by: MyString
+  resolution: MyString
+  themis_confidence: 1
+  resolved_by: MyString
+  incident_id: 1
+
+two:
+  reported: 2024-01-28 04:45:52
+  sender: MyString
+  subject: MyString
+  reported_by: MyString
+  resolution: MyString
+  themis_confidence: 1
+  resolved_by: MyString
+  incident_id: 1
