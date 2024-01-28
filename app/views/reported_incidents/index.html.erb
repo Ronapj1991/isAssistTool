@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Reported incidents</h1>
+
+<div id="reported_incidents">
+  <% @reported_incidents.each do |reported_incident| %>
+    <%= render reported_incident %>
+    <p>
+      <%= link_to "Show this reported incident", reported_incident %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New reported incident", new_reported_incident_path %>
