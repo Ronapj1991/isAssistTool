@@ -10,13 +10,9 @@ class ReportedIncidentsController < ApplicationController
     csvImportService = CsvImportService.new(file)
     csvImportService.import
     
-    @incident_url = "https://members.ironscales.com/irontraps/attackdetails/mail/"
-    if params[:instance] == "eu"
-      @incident_url = "https://members.eu.ironscales.com/irontraps/attackdetails/mail/"
-    end
-
-    @reported_incidents = ReportedIncident.all
-    render "home2", notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
+    $incident_url = params[:incident_url]
+    
+    redirect_to root_path, notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
   end
   
   def clear
