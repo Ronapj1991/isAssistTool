@@ -6,12 +6,13 @@ class ReportedIncidentsController < ApplicationController
     
     return redirect_to root_path, alert: 'No file selected' unless file
     return redirect_to root_path, alert: 'Please select CSV file instead' unless file.content_type == 'text/csv'
-    
+
     csvImportService = CsvImportService.new(file)
     csvImportService.import
     
-    redirect_to root_path, 
-    notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
+    $incident_url = params[:incident_url]
+    
+    redirect_to root_path, notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
   end
   
   def clear
