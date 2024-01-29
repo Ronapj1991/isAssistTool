@@ -1,7 +1,7 @@
 <h1>Assist Tool for IRONSCALES</h1>
 <p>This is a companion app for the IRONSCALES dashboard</p>
 
-<%= render 'reported_incidents/import_form' %>
+<% debugger %>
 
 <% @reported_incidents.each do |incident| %>
   <table>
@@ -23,8 +23,9 @@
     </tr>
     <tr>
       <td><%= link_to "Show this reported incident", incident %></td>
-      <td><%= link_to "View in IRONSCALES dashboard", "#{@incident_url}#{incident.incident_id}" %></td>
+      <td><%= link_to "View in IRONSCALES dashboard", @incident_url + incident.incident_id.to_s %></td>
     </tr>
   </table>
   <br />
 <% end %>
+

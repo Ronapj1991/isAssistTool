@@ -6,12 +6,17 @@ class ReportedIncidentsController < ApplicationController
     
     return redirect_to root_path, alert: 'No file selected' unless file
     return redirect_to root_path, alert: 'Please select CSV file instead' unless file.content_type == 'text/csv'
-    
+
     csvImportService = CsvImportService.new(file)
     csvImportService.import
     
-    redirect_to root_path, 
-    notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
+    @incident_url = "https://members.ironscales.com/irontraps/attackdetails/mail/"
+    if params[:instance] == "eu"
+      @incident_url = "https://members.eu.ironscales.com/irontraps/attackdetails/mail/"
+    end
+
+    @reported_incidents = ReportedIncident.all
+    render "home2", notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
   end
   
   def clear
