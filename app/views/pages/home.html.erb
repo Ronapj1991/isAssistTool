@@ -4,15 +4,28 @@
 <%= render 'reported_incidents/import_form' %>
 
 <% @reported_incidents.each do |incident| %>
-  <div>
-    <div>Incident-ID: <%= incident.incident_id %></div>
-    <div>Sender:<%= incident.sender %></div>
-    <div>Subject:<%= incident.subject %></div>
-    <div>Reported By:<%= incident.reported_by %></div>
-    <div>Resolution:<%= incident.resolution %></div>
-    <div>Themis Confidence:<%= incident.themis_confidence %><span>%</span></div>
-    <div>Resolved By:<%= incident.resolved_by %></div>
-    <div>Report Date and Time: <%= incident.reported %> </div>
-  </div>
+  <table>
+    <tr>
+      <td><strong>Incident ID</strong></td>
+      <td><%= incident.incident_id %></td>
+    </tr>
+    <tr>
+      <td>Resolution</td>
+      <td><%= incident.resolution %></td>
+    </tr>
+    <tr>
+      <td>Resolved By</td>
+      <td><%= incident.resolved_by %></td>
+    </tr>
+    <tr>  
+      <td>Creation Date</td>
+      <td><%= incident.reported %></td>
+    </tr>
+    <tr>
+      <td><%= link_to "Show this reported incident", incident %></td>
+      <td><%= link_to "View in IRONSCALES dashboard", 
+      "https://members.ironscales.com/irontraps/attackdetails/mail/#{incident.incident_id}" %></td>
+    </tr>
+  </table>
   <br />
 <% end %>

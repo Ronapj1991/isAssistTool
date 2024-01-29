@@ -6,6 +6,7 @@ class CsvImportService
     end
     
     def import
+      @count = 0
       file = File.open(@file)
       csv = CSV.parse(file, headers: true, col_sep: ',')
       csv.each do |row|
@@ -21,6 +22,7 @@ class CsvImportService
         incident_hash[:themis_confidence] = row['Themis Confidence'].to_i
         
         ReportedIncident.create!(incident_hash)
+        @count += 1
       end
     end
     
