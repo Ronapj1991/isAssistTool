@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_28_044552) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_134319) do
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "reported_incident_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reported_incident_id"], name: "index_comments_on_reported_incident_id"
+  end
+
   create_table "reported_incidents", force: :cascade do |t|
     t.datetime "reported"
     t.string "sender"
@@ -24,4 +32,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_28_044552) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "reported_incidents"
 end

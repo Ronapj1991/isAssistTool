@@ -2,9 +2,17 @@
 
 <%= render @reported_incident %>
 
-<div>
-  <%= link_to "Edit this reported incident", edit_reported_incident_path(@reported_incident) %> |
-  <%= link_to "Back to reported incidents", reported_incidents_path %>
 
-  <%= button_to "Destroy this reported incident", @reported_incident, method: :delete %>
+<h2>Comments</h2>
+<% for comment in @reported_incident.comment %>
+  <ul>
+    <li><%= comment.content %></li>
+  </ul>
+<% end %>
+
+<div>
+  <%= link_to "Back to reported incidents", root_path %>
+  <%= link_to "Edit Incident", edit_reported_incident_path(@reported_incident) %> |
+  <%= link_to 'Add Comment', reported_incident_comments_path(@reported_incident) %> |
+  <%= link_to "View in IRONSCALES dashboard", "#{$incident_url}#{@reported_incident.incident_id}" %>
 </div>

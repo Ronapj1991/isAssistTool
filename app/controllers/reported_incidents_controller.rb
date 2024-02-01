@@ -10,7 +10,8 @@ class ReportedIncidentsController < ApplicationController
     csvImportService = CsvImportService.new(file)
     csvImportService.import
     
-    $incident_url = params[:incident_url]
+    @incident_url = params[:incident_url]
+    session[:incident_url] = @incident_url
     
     redirect_to root_path, notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
   end
@@ -23,6 +24,7 @@ class ReportedIncidentsController < ApplicationController
   # GET /reported_incidents or /reported_incidents.json
   def index
     @reported_incidents = ReportedIncident.all
+    @incident_url = session[:incident_url]
   end
 
   # GET /reported_incidents/1 or /reported_incidents/1.json
