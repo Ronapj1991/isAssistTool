@@ -1,0 +1,11 @@
+<h1>Comments page</h1>
+
+<% @comments.each do |comment| %>
+  <h6>Comment <%= comment.id %></h6>
+  <%= comment.content %>
+  <%= link_to 'Related Incident', [@reported_incident] %>
+  <%= link_to 'Edit Comment', edit_reported_incident_comment_path(@reported_incident, comment) %>
+  <%= link_to 'Delete Comment', [@reported_incident, comment], data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= link_to 'New Comment', new_reported_incident_comment_path(@reported_incident) %>

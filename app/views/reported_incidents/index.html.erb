@@ -1,14 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<h1>Assist Tool for IRONSCALES</h1>
+<p>This is a companion app for the IRONSCALES dashboard</p>
 
-<h1>Reported incidents</h1>
+<%= render partial: 'reported_incidents/import_form' %>
 
-<div id="reported_incidents">
-  <% @reported_incidents.each do |reported_incident| %>
-    <%= render reported_incident %>
-    <p>
-      <%= link_to "Show this reported incident", reported_incident %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New reported incident", new_reported_incident_path %>
+<% @reported_incidents.each do |incident| %>
+  <table>
+    <tr>
+      <td><strong>Incident ID</strong></td>
+      <td><%= incident.incident_id %></td>
+    </tr>
+    <tr>
+      <td>Resolution</td>
+      <td><%= incident.resolution %></td>
+    </tr>
+    <tr>
+      <td>Resolved By</td>
+      <td><%= incident.resolved_by %></td>
+    </tr>
+    <tr>  
+      <td>Creation Date</td>
+      <td><%= incident.reported %></td>
+    </tr>
+    <tr>
+      <td><%= link_to "Show this reported incident", incident %></td>
+      <td><%= link_to "View in IRONSCALES dashboard", "#{@incident_url}#{incident.incident_id}" %></td>
+    </tr>
+  </table>
+  <br />
+<% end %>
