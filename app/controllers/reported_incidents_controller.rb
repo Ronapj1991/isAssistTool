@@ -25,6 +25,15 @@ class ReportedIncidentsController < ApplicationController
   def index
     @reported_incidents = ReportedIncident.all
     @incident_url = session[:incident_url]
+    
+    #export
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data ReportedIncidentsCsvGenerator.(@reported_incidents, fields: ['incident_id', 
+        'resolution', 'reported_by', 'sender', 'subject', 'resolved_by', 'themis_confidence'])
+      end
+    end
   end
 
   # GET /reported_incidents/1 or /reported_incidents/1.json
