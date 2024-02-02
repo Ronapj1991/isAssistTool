@@ -3,6 +3,8 @@
 
 <%= render partial: 'reported_incidents/import_form' %>
 
+<%= link_to "Export CSV", reported_incidents_path(format: "csv"), class: 'btn btn-primary' %>
+
 <% @reported_incidents.each do |incident| %>
   <table>
     <tr>
