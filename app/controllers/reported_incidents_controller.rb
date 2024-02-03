@@ -3,6 +3,7 @@ class ReportedIncidentsController < ApplicationController
   
   def import
     file = params[:file]
+    ReportedIncidents.import(@comment, params[:file])
     
     return redirect_to root_path, alert: 'No file selected' unless file
     return redirect_to root_path, alert: 'Please select CSV file instead' unless file.content_type == 'text/csv'

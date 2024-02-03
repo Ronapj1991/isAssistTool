@@ -5,6 +5,10 @@
 
 <%= link_to "Export CSV", reported_incidents_path(format: "csv"), class: 'btn btn-primary' %>
 
+<%= bar_chart ReportedIncident.group(:resolution).count %>
+
+<%= column_chart ReportedIncident.group(:resolved_by).count %>
+
 <% @reported_incidents.each do |incident| %>
   <table>
     <tr>
