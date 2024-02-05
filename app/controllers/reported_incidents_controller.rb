@@ -2,27 +2,33 @@ class ReportedIncidentsController < ApplicationController
   before_action :set_reported_incident, only: %i[ show edit update destroy ]
   before_action :set_incident_url_from_session, only: %i[ index spam ]
   
+  def auto_incident_reponse
+    @reported_incidents = ReportedIncident.where(resolved_by: ["Themis", "External trusted source"])
+    export_to_csv
+  end
+  
+  def analyst
+    @reported_incidents = ReportedIncident.where.not(resolved_by: "Themis")
+    export_to_csv
+  end
+  
   def spam
     @reported_incidents = ReportedIncident.where(resolution: "Spam")
-    
     export_to_csv
   end
   
   def phishing
     @reported_incidents = ReportedIncident.where(resolution: "Phishing")
-    
     export_to_csv
   end
   
   def unclassified
     @reported_incidents = ReportedIncident.where(resolution: "Unclassified")
-    
     export_to_csv
   end
   
   def safe
     @reported_incidents = ReportedIncident.where(resolution: "Safe")
-    
     export_to_csv
   end
   
