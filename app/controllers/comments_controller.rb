@@ -3,18 +3,18 @@ class CommentsController < ApplicationController
     before_action :set_comment, only: [:show, :edit, :update, :destroy]
     
     def index
-       @comments = @reported_incident.comment
+       @comments = @reported_incident.comments
     end
     
     def show
     end
     
     def new
-      @comment = @reported_incident.comment.build
+      @comment = @reported_incident.comments.build
     end
     
     def create
-      @comment = @reported_incident.comment.build(comment_params)
+      @comment = @reported_incident.comments.build(comment_params)
       
       respond_to do |format|
         if @comment.save
@@ -57,7 +57,7 @@ class CommentsController < ApplicationController
       end
     
       def set_comment
-         @comment = @reported_incident.comment.find(params[:id]) 
+         @comment = @reported_incident.comments.find(params[:id]) 
       end
       
       def comment_params

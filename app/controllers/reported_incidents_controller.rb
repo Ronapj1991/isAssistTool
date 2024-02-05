@@ -1,9 +1,33 @@
 class ReportedIncidentsController < ApplicationController
   before_action :set_reported_incident, only: %i[ show edit update destroy ]
+  before_action :set_incident_url_from_session, only: %i[ index spam ]
+  
+  def spam
+    @reported_incidents = ReportedIncident.where(resolution: "Spam")
+    
+    export_to_csv
+  end
+  
+  def phishing
+    @reported_incidents = ReportedIncident.where(resolution: "Phishing")
+    
+    export_to_csv
+  end
+  
+  def unclassified
+    @reported_incidents = ReportedIncident.where(resolution: "Unclassified")
+    
+    export_to_csv
+  end
+  
+  def safe
+    @reported_incidents = ReportedIncident.where(resolution: "Safe")
+    
+    export_to_csv
+  end
   
   def import
     file = params[:file]
-    ReportedIncidents.import(@comment, params[:file])
     
     return redirect_to root_path, alert: 'No file selected' unless file
     return redirect_to root_path, alert: 'Please select CSV file instead' unless file.content_type == 'text/csv'
@@ -25,16 +49,8 @@ class ReportedIncidentsController < ApplicationController
   # GET /reported_incidents or /reported_incidents.json
   def index
     @reported_incidents = ReportedIncident.all
-    @incident_url = session[:incident_url]
     
-    #export
-    respond_to do |format|
-      format.html
-      format.csv do
-        send_data ReportedIncidentsCsvGenerator.(@reported_incidents, fields: ['incident_id', 
-        'resolution', 'reported_by', 'sender', 'subject', 'resolved_by', 'themis_confidence'])
-      end
-    end
+    export_to_csv
   end
 
   # GET /reported_incidents/1 or /reported_incidents/1.json
@@ -89,6 +105,16 @@ class ReportedIncidentsController < ApplicationController
   end
 
   private
+    def export_to_csv
+      respond_to do |format|
+        format.html 
+        format.csv { send_data @reported_incidents.as_csv, filename: "Updated-ReportedIncidents-#{Date.today}.csv" }
+      end
+    end
+  
+    def set_incident_url_from_session
+      @incident_url = session[:incident_url]
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_reported_incident
       @reported_incident = ReportedIncident.find(params[:id])
