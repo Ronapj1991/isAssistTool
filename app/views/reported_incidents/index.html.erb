@@ -7,6 +7,4 @@
 
 <%= bar_chart ReportedIncident.group(:resolution).count %>
 
-<%= column_chart ReportedIncident.group(:resolved_by).count %>
-
 <%= render partial: "incident_format" %>

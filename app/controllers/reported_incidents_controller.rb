@@ -8,7 +8,7 @@ class ReportedIncidentsController < ApplicationController
   end
   
   def analyst
-    @reported_incidents = ReportedIncident.where.not(resolved_by: "Themis")
+    @reported_incidents = ReportedIncident.where.not(resolved_by: ["Themis", "External trusted source"])
     export_to_csv
   end
   
@@ -114,7 +114,10 @@ class ReportedIncidentsController < ApplicationController
     def export_to_csv
       respond_to do |format|
         format.html 
-        format.csv { send_data @reported_incidents.as_csv, filename: "Updated-ReportedIncidents-#{Date.today}.csv" }
+        format.csv { send_data @reported_incidents.select("reported_incidents.*, comments.*")
+                                                  .left_outer_joins(:comments)
+                                                  .order(:incident_id)
+                                                  .as_csv, filename: "Updated-ReportedIncidents-#{Date.today}.csv" }
       end
     end
   
