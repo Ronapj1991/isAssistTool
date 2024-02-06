@@ -8,3 +8,7 @@
 <%= bar_chart ReportedIncident.group(:resolution).count %>
 
 <%= render partial: "incident_format" %>
+
+<div class="pag-bar mt-5 pt-5">
+  <%== pagy_bootstrap_nav(@pagy) %>
+</div>
