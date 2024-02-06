@@ -2,4 +2,6 @@
 
 <%= link_to "Export CSV", phishing_path(format: "csv"), class: 'btn btn-primary' %>
 
+<%= column_chart @reported_incidents.group(:resolved_by).count %>
+
 <%= render partial: "incident_format" %>
