@@ -3,32 +3,32 @@ class ReportedIncidentsController < ApplicationController
   before_action :set_incident_url_from_session, only: %i[ index spam ]
   
   def auto_incident_reponse
-    @reported_incidents = ReportedIncident.where(resolved_by: ["Themis", "External trusted source"])
+    @pagy, @reported_incidents = pagy((ReportedIncident.where(resolved_by: ["Themis", "External trusted source"])), items: 10)
     export_to_csv
   end
   
   def analyst
-    @reported_incidents = ReportedIncident.where.not(resolved_by: ["Themis", "External trusted source"])
+    @pagy, @reported_incidents = pagy((ReportedIncident.where.not(resolved_by: ["Themis", "External trusted source"])), items: 10)
     export_to_csv
   end
   
   def spam
-    @reported_incidents = ReportedIncident.where(resolution: "Spam")
+    @pagy, @reported_incidents = pagy((ReportedIncident.where(resolution: "Spam")), items: 10)
     export_to_csv
   end
   
   def phishing
-    @reported_incidents = ReportedIncident.where(resolution: "Phishing")
+    @pagy, @reported_incidents = pagy((ReportedIncident.where(resolution: "Phishing")), items: 10)
     export_to_csv
   end
   
   def unclassified
-    @reported_incidents = ReportedIncident.where(resolution: "Unclassified")
+    @pagy, @reported_incidents = pagy((ReportedIncident.where(resolution: "Unclassified")), items: 10)
     export_to_csv
   end
   
   def safe
-    @reported_incidents = ReportedIncident.where(resolution: "Safe")
+    @pagy, @reported_incidents = pagy((ReportedIncident.where(resolution: "Safe")), items: 10)
     export_to_csv
   end
   
@@ -54,8 +54,11 @@ class ReportedIncidentsController < ApplicationController
 
   # GET /reported_incidents or /reported_incidents.json
   def index
-    @reported_incidents = ReportedIncident.all
-    
+    if params[:query].present?
+      @pagy, @reported_incidents = pagy((ReportedIncident.search_reported_incidents(params[:query])), items: 10)
+    else
+      @pagy, @reported_incidents = pagy((ReportedIncident.all), items: 10)
+    end
     export_to_csv
   end
 
