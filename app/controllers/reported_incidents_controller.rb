@@ -33,6 +33,10 @@ class ReportedIncidentsController < ApplicationController
   end
   
   def import
+    if ReportedIncident.first
+      return redirect_to root_path, alert: 'Please delete all data before uploading'
+    end
+    
     file = params[:file]
     
     return redirect_to root_path, alert: 'No file selected' unless file
@@ -44,7 +48,7 @@ class ReportedIncidentsController < ApplicationController
     @incident_url = params[:incident_url]
     session[:incident_url] = @incident_url
     
-    redirect_to root_path, notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
+    redirect_to reported_incidents_path, notice: "#{csvImportService.number_imported_with_last_run} incidents imported"
   end
   
   def clear

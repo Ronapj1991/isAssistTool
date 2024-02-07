@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/home'
   resources :reported_incidents do
     resources :comments
     collection do
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
   get :safe, to: "reported_incidents#safe"
   get :unclassified, to: "reported_incidents#unclassified"
   delete :clear_reported_incidents, to: "reported_incidents#clear"
-  root 'reported_incidents#index'
+  root 'pages#home'
 end
