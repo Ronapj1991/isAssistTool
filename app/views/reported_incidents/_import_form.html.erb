@@ -1,7 +1,7 @@
 <%= form_with url: import_reported_incidents_path, method: :post do |f| %>
     <div class="container">
         <span>Select Region:</span>
-        <%= f.radio_button :incident_url, "https://members.ironscales.com/irontraps/attackdetails/" %>
+        <%= f.radio_button :incident_url, "https://members.ironscales.com/irontraps/attackdetails/", :checked => true %>
         <%= f.label :incident_url, "US" %>
         <%= f.radio_button :incident_url, "https://members.eu.ironscales.com/irontraps/attackdetails/" %>
         <%= f.label :incident_url, "EU" %>
@@ -10,9 +10,6 @@
         <%= f.file_field :file, accept: ".csv" %>
         <div class="btn-group">
            <%= f.submit "Upload Reported Incidents", class: "btn btn-primary" %>
-           <%= link_to "Clear Reported Incidents", clear_reported_incidents_path, class: "btn btn-danger",
-              data: { turbo_method: :delete, 
-              turbo_confirm: "Are you sure?"} %>
         </div>
     </div>
 <% end %>
