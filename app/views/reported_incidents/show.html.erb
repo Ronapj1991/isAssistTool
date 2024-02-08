@@ -1,18 +1,24 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @reported_incident %>
+<div class="container d-xl-inline-flex justify-content-evenly">
+  <%= render @reported_incident %>
+  <div class="container">
+      <div class="card text-bg-light mb-3 border-primary mb-3" style="width: 18rem;">
+      <div class="card-header">Comments</div>
+      <% for comment in @reported_incident.comments %>
+      <div class="card-body">
+        <p class="card-text"><%= comment.content %></p>
+        <%= link_to 'Edit Comment', edit_reported_incident_comment_path(@reported_incident, comment), class: "btn btn-outline-secondary btn-sm" %>
+        <%= link_to 'Delete Comment', [@reported_incident, comment], data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+      </div>
+      <% end %>
+      </div>
+  </div>
+</div>
 
-
-<h2>Comments</h2>
-<% for comment in @reported_incident.comments %>
-  <ul>
-    <li><%= comment.content %></li>
-  </ul>
-<% end %>
-
-<div>
-  <%= link_to "Back to reported incidents", root_path %>
-  <%= link_to "Edit Incident", edit_reported_incident_path(@reported_incident) %> |
-  <%= link_to 'Add Comment', reported_incident_comments_path(@reported_incident) %> |
-  <%= link_to "View in IRONSCALES dashboard", "#{$incident_url}#{@reported_incident.incident_id}" %>
+<div class="button-group d-flex justify-content-center">
+  <%= link_to "Back to reported incidents", reported_incidents_path, class: "btn btn-outline-primary" %>
+  <%= link_to "Edit Incident", edit_reported_incident_path(@reported_incident), class: "btn btn-outline-primary" %>
+  <%= link_to 'Add Comment', new_reported_incident_comment_path(@reported_incident), class: "btn btn-outline-primary" %>
+  <%= link_to "View in IRONSCALES dashboard", "#{$incident_url}#{@reported_incident.incident_id}", class: "btn btn-outline-primary" %>
 </div>

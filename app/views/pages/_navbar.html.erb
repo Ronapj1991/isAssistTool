@@ -1,0 +1,29 @@
+<!--for scalability, each model(based on CSV) may need it's own navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-fluid">
+    <%= link_to "Import CSV", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "View Incidents", reported_incidents_path, class: "nav-link active" %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter By
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Phishing", phishing_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Spam", spam_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Safe", safe_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Unclassified", unclassified_path, class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Classified by Analyst", resolved_by_analyst_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Classified by Themis", automated_remediation_path, class: "dropdown-item" %></li>
+          </ul>
+        </li>
+    </div>
+  </div>
+</nav>

@@ -1,14 +1,14 @@
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 26rem;">
   <div class="card-header">
-    <strong>Incident ID:</strong><%= reported_incident.incident_id %>
+    <strong>Incident ID:</strong> IS-<%= reported_incident.incident_id %>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><strong>Report Date and Time:</strong><%= reported_incident.reported %></li>
-    <li class="list-group-item"><strong>Sender:</strong><%= reported_incident.sender %></li>
-    <li class="list-group-item"><strong>Subject:</strong><%= reported_incident.subject %></li>
-    <li class="list-group-item"><strong>Reported by:</strong><%= reported_incident.reported_by %></li>
-    <li class="list-group-item"><strong>Resolution:</strong><%= reported_incident.resolution %></li>
-    <li class="list-group-item"><strong>Themis confidence:</strong><%= reported_incident.themis_confidence %>%</li>
-    <li class="list-group-item"><strong>Resolved by:</strong><%= reported_incident.resolved_by %></li>
+    <li class="list-group-item"><strong>Report Date and Time:</strong> <%= reported_incident.reported %></li>
+    <li class="list-group-item"><strong>Sender:</strong> <%= reported_incident.sender %></li>
+    <li class="list-group-item"><strong>Subject:</strong> <%= reported_incident.subject %></li>
+    <li class="list-group-item"><strong>Reported by:</strong> <%= reported_incident.reported_by %></li>
+    <li class="list-group-item"><strong>Resolution:</strong> <%= reported_incident.resolution %></li>
+    <li class="list-group-item"><strong>Themis confidence:</strong> <%= reported_incident.themis_confidence %>%</li>
+    <li class="list-group-item"><strong>Resolved by:</strong> <%= reported_incident.resolved_by %></li>
   </ul>
 </div

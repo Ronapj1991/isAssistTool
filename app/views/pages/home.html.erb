@@ -1,10 +1,4 @@
-<h1>Assist Tool for IRONSCALES</h1>
-<p>This is a companion app for the IRONSCALES dashboard</p>
-
 <div class="container">
+    <h5>Parse Reported Incidents CSV</h5>
     <%= render partial: 'reported_incidents/import_form' %>
 </div>
-
-<%= link_to "Clear Reported Incidents", clear_reported_incidents_path, class: "btn btn-danger",
-              data: { turbo_method: :delete, 
-              turbo_confirm: "Are you sure?"} %>
