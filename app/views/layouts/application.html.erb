@@ -12,7 +12,9 @@
 
   <body>
     <%= render 'layouts/alerts' %>
+    <%= render 'layouts/banner' %>
     <div class="container">
+      <%= render partial: 'pages/navbar' %>
       <%= yield %>
     </div>
   </body>

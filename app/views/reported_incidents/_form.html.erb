@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :resolution, style: "display: block" %>
-    <%= form.text_field :resolution %>
+    <%= form.select :resolution, ["Unclassified", "Safe", "Spam", "Phishing"], selected: :resolution %>
   </div>
 
   <div>
     <%= form.label :resolved_by, style: "display: block" %>
-    <%= form.text_field :resolved_by %>
+    <%= form.select :resolved_by, ["Analyst", "Themis"], selected: :resolved_by %>
   </div>
 
   <div>

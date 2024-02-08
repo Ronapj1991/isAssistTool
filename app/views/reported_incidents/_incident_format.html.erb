@@ -1,25 +1,20 @@
-<% @reported_incidents.each do |incident| %>
-  <table>
-    <tr>
-      <td><strong>Incident ID</strong></td>
-      <td><%= incident.incident_id %></td>
-    </tr>
-    <tr>
-      <td>Resolution</td>
+<table class="table table-striped">
+  <tr>
+    <th>Incident ID</th>
+    <th>Resolution</th>
+    <th>Resolved By</th>
+    <th>Creation Date</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @reported_incidents.each do |incident| %>
+  <tr>
+      <td><%= "IS-#{incident.incident_id}" %></td>
       <td><%= incident.resolution %></td>
-    </tr>
-    <tr>
-      <td>Resolved By</td>
       <td><%= incident.resolved_by %></td>
-    </tr>
-    <tr>  
-      <td>Creation Date</td>
       <td><%= incident.reported %></td>
-    </tr>
-    <tr>
-      <td><%= link_to "Show this reported incident", incident %></td>
-      <td><%= link_to "View in IRONSCALES dashboard", "#{@incident_url}#{incident.incident_id}" %></td>
-    </tr>
-  </table>
-  <br />
-<% end %>
+      <td><%= link_to "Show reported incident", incident, class: "btn btn-outline-dark" %></td>
+      <td><%= link_to "View in IRONSCALES dashboard", "#{@incident_url}#{incident.incident_id}", class: "btn btn-outline-primary" %></td>
+  </tr>
+  <% end %>
+</table>

@@ -123,7 +123,7 @@ class ReportedIncidentsController < ApplicationController
         format.html 
         format.csv { send_data @reported_incidents.select("reported_incidents.*, comments.*")
                                                   .left_outer_joins(:comments)
-                                                  .order(:incident_id)
+                                                  .order(:incident_id).reverse_order
                                                   .as_csv, filename: "Updated-ReportedIncidents-#{Date.today}.csv" }
       end
     end
