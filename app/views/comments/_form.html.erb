@@ -1,7 +1,7 @@
 <%= form_with(model: [@reported_incident, comment], local: true) do |form| %>
   <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <div id="error_explanation" style="color: red">
+      <h3><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h3>
 
       <ul>
       <% comment.errors.full_messages.each do |message| %>
@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
     <%= form.label :content %>
     <%= form.text_field :content %>
