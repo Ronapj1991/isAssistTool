@@ -2,6 +2,7 @@ class ReportedIncident < ApplicationRecord
   require 'csv'
   has_many :comments, dependent: :destroy
     
+  #Creating the CSV Export  
   CSV_HEADER = %w[Incident-ID Resolution Reporter Sender Subject Resolved_by Themis_Confidence Comments]
   def self.as_csv
     #we start with a relation array where there "may" be multiple rows per incident

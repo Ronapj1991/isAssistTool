@@ -17,7 +17,6 @@
 </div>
 
 <div class="button-group d-flex justify-content-center">
-  <%= link_to "Back to reported incidents", reported_incidents_path, class: "btn btn-outline-primary" %>
   <%= link_to "Edit Incident", edit_reported_incident_path(@reported_incident), class: "btn btn-outline-primary" %>
   <%= link_to 'Add Comment', new_reported_incident_comment_path(@reported_incident), class: "btn btn-outline-primary" %>
   <%= link_to "View in IRONSCALES dashboard", "#{$incident_url}#{@reported_incident.incident_id}", class: "btn btn-outline-primary" %>

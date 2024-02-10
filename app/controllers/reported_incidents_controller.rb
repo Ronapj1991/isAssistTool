@@ -1,4 +1,5 @@
 class ReportedIncidentsController < ApplicationController
+  require 'csv'
   before_action :set_reported_incident, only: %i[ show edit update destroy ]
   before_action :set_incident_url_from_session, only: %i[ index spam ]
   
@@ -38,7 +39,18 @@ class ReportedIncidentsController < ApplicationController
     end
     
     file = params[:file]
-    
+
+    #make sure that the right CSV is uploaded
+    return redirect_to root_path, alert: 'You can only upload the Reported Incidents CSV' unless 
+        file.original_filename.match(/Reported Incidents \(\d\d\d\d\-\d\d-\d\dT.*\).csv/)
+    #Incident ID cannot be empty
+    return redirect_to root_path, alert: 'Make sure that all Incident ID are not empty' unless 
+           CSV.parse(file.open, headers: true).each do |row| 
+             if row[7].nil?
+               break
+             end
+           end
+    #Make sure a CSV is selected
     return redirect_to root_path, alert: 'No file selected' unless file
     return redirect_to root_path, alert: 'Please select CSV file instead' unless file.content_type == 'text/csv'
 
